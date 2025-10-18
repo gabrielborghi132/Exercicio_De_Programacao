@@ -11,11 +11,12 @@ int main(){
     int t;
     cin>>t;
     int num = 0;
-    while(--t){
+    while(t--){
         int q;
         cin>>q;
         bool passou = false;
         memset(visitado,0,sizeof(visitado));
+        memset(grafo,0,sizeof(grafo));
         num = 0;
         for(int i = 0;i<q;++i){
             for(int j = 0;j<q;++j){
@@ -51,18 +52,12 @@ int main(){
             if(!visitado[0][i]){
                 bfs(0,i);
             }
-        }
-        for(int i = 0;i<q;i++){
             if(!visitado[q-1][i]){
                 bfs(q-1,i);
             }
-        }
-        for(int i = 0;i<q;i++){
             if(!visitado[i][0]){
                 bfs(i,0);
             }
-        }
-        for(int i = 0;i<q;i++){
             if(!visitado[i][q-1]){
                 bfs(i,q-1);
             }
