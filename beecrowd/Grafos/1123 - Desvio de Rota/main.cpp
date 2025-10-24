@@ -30,6 +30,9 @@ int main(){
 
                 if(-d>dist[u])continue;
                 for(auto [v,w]:grafo[u]){
+                    if(u<c-1&&v!=u+1){
+                        continue;
+                    }
                     if (dist[v] > dist[u] + w) {
                         dist[v] = dist[u] + w;
                         pq.push({-dist[v], v});
@@ -38,7 +41,7 @@ int main(){
             }
         };
         dijkstra(k);
-        cout<<dist[c]<<endl;
+        cout<<dist[c-1]<<endl;
     }
 
     return 0;
