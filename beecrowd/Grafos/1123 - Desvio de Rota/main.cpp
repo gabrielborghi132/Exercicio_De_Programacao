@@ -3,8 +3,6 @@ using namespace std;
 #define endl '\n'
 const int INF = 1e9;
 const int MAX = 250;
-
-
 int main(){
     cin.tie(NULL);
     ios::sync_with_stdio(false);
