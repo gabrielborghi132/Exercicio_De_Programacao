@@ -4,7 +4,6 @@ using namespace std;
 const int MAX = 26;
 bool visitado[MAX + 1];
 int grafo[MAX + 1][MAX + 1];
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
