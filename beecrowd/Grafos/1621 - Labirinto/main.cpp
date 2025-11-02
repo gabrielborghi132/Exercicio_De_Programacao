@@ -2,21 +2,25 @@
 using namespace std;
 
 #define endl '\n'
-const int MAX = 1005;
+const int MAX = 501;
 
 int n, m;
 char grid[MAX][MAX];
 bool vis[MAX][MAX];
 int dist[MAX][MAX];
-
 int dx[4] = {-1, 1, 0, 0};
 int dy[4] = {0, 0, -1, 1};
+
+int maiorDist = 0;
+int sx3, sy3;
 
 bool dentro(int x, int y) {
     return x >= 0 && x < n && y >= 0 && y < m;
 }
 
 void bfs(int sx, int sy) {
+    memset(vis, false, sizeof(vis));
+    memset(dist, 0, sizeof(dist));
     queue<pair<int,int>> q;
     q.push({sx, sy});
     vis[sx][sy] = true;
@@ -33,6 +37,11 @@ void bfs(int sx, int sy) {
             if (dentro(nx, ny) && !vis[nx][ny] && grid[nx][ny] != '#') {
                 vis[nx][ny] = true;
                 dist[nx][ny] = dist[x][y] + 1;
+                if (dist[nx][ny] > maiorDist) {
+                    maiorDist = dist[nx][ny];
+                    sx3 = nx;
+                    sy3 = ny;
+                }
                 q.push({nx, ny});
             }
         }
@@ -43,25 +52,29 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    cin >> n >> m;
+    while (cin >> n >> m, n || m) {
+        maiorDist = 0;
+        int sx = -1, sy = -1;
 
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < m; j++)
-            cin >> grid[i][j];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++) {
+                cin >> grid[i][j];
+                if (grid[i][j] == '.') {
+                    sx = i;
+                    sy = j;
+                }
+            }
 
-    int sx, sy; // posição inicial
-    cin >> sx >> sy;
-
-    bfs(sx, sy);
-
-    cout << "Mapa de distâncias (-1 = inalcançável):" << endl;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            if (grid[i][j] == '#') cout << '#';
-            else if (vis[i][j]) cout << dist[i][j] % 10; // mostra distância (módulo 10 p/ caber)
-            else cout << '.';
+        if (sx == -1) {
+            cout << 0 << endl;
+            continue;
         }
-        cout << endl;
+
+        bfs(sx, sy);
+        maiorDist = 0;
+        bfs(sx3, sy3);
+
+        cout << maiorDist << endl;
     }
 
     return 0;
