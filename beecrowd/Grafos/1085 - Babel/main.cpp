@@ -14,19 +14,19 @@ vector<int> dist;
 
 void dijkstra(int s) {
     dist.assign(id.size() + 1, INF); // o vetor de distâncias ser externo é situacional
-    priority_queue<pair<int,int>> pq; // (distância negativa, nó)
+    priority_queue<tuple<int,int,string>> pq; // (distância negativa, nó)
 
     dist[s] = 0; // lembrar de colocar a distância inicial como 0
-    pq.push({0, s});
+    pq.push({0, s, ""});
 
     while (!pq.empty()) {
-        auto [d, u] = pq.top(); pq.pop();
+        auto [d, u, p] = pq.top(); pq.pop();
         if (-d > dist[u]) continue; // ignora se já há caminho melhor
 
-        for (auto [v, w, p] : g[u]) {
-            if (dist[v] > dist[u] + w&& p[0] != u) {
+        for (auto [v, w, x] : g[u]) {
+            if (dist[v] > dist[u] + w && p[0] != x[0]) {
                 dist[v] = dist[u] + w;
-                pq.push({-dist[v], v}); // negativo pra simular min-heap
+                pq.push({-dist[v], v, x}); // negativo pra simular min-heap
             }
         }
     }

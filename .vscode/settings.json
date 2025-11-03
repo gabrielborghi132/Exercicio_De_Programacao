@@ -8,6 +8,8 @@
         "tuple": "cpp",
         "array": "cpp",
         "variant": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "random": "cpp",
+        "iosfwd": "cpp"
     }
 }
