@@ -8,6 +8,8 @@ int n;
 unordered_map<string,int> id;
 unordered_map<int,string> idReverso;
 unordered_map<string,int> idPalavras;
+unordered_map<int,string> idPalavrasReverso;
+
 using tiii = tuple<int,int,string>;
 vector<tiii> g[MAXN];
 vector<int> dist;
@@ -17,16 +19,17 @@ void dijkstra(int s) {
     priority_queue<tuple<int,int,string>> pq; // (distância negativa, nó)
 
     dist[s] = 0; // lembrar de colocar a distância inicial como 0
-    pq.push({0, s, ""});
-
+    pq.push({0, s, idReverso[s]});
+    string letra = idReverso[s];
     while (!pq.empty()) {
         auto [d, u, p] = pq.top(); pq.pop();
         if (-d > dist[u]) continue; // ignora se já há caminho melhor
-
+        
         for (auto [v, w, x] : g[u]) {
-            if (dist[v] > dist[u] + w && p[0] != x[0]) {
+            if (dist[v] > dist[u] + w) {
                 dist[v] = dist[u] + w;
                 pq.push({-dist[v], v, x}); // negativo pra simular min-heap
+                letra = p;
             }
         }
     }
@@ -52,6 +55,9 @@ int main() {
             if (!id.count(s3)) {
                 idPalavras[s3] = counter++;
             }
+            idReverso[id[s]] = s;
+            idReverso[id[s2]] = s2;
+            idReverso[idPalavras[s3]] = s3;
             g[id[s]].push_back({id[s2], 1, s3});
             g[id[s2]].push_back({id[s], 1, s3});
         }
