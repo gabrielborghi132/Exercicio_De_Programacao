@@ -10,6 +10,7 @@
         "variant": "cpp",
         "format": "cpp",
         "random": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "ostream": "cpp"
     }
 }
