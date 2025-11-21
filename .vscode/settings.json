@@ -11,6 +11,8 @@
         "format": "cpp",
         "random": "cpp",
         "iosfwd": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "chrono": "cpp",
+        "span": "cpp"
     }
 }
