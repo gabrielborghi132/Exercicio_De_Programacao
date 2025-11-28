@@ -128,7 +128,9 @@ int main()
             int b;
             cin>>c>>a>>b;
             if(c=='C'){
-                arvore.update_range(1,a,b);
+                arvore.update_range(a,a,b);
+            }else{
+                arvore.query(a,b);
             }
         }
     }
