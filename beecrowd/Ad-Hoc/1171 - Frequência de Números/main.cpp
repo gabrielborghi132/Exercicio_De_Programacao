@@ -1,3 +1,8 @@
+/**************************************************/
+//         1171 - Frequência de Números
+//https://judge.beecrowd.com/pt/problems/view/1171*/
+/**************************************************/
+
 #include <bits/stdc++.h>
 #define endl '\n'
 using ll = long long;
