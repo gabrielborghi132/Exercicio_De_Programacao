@@ -1,3 +1,9 @@
+/**************************************************/
+//         1259 - Pares e Ímpares
+//https://judge.beecrowd.com/pt/problems/view/1259*/
+//
+/**************************************************/
+
 #include <bits/stdc++.h>
 using namespace std;
 #define endl '\n'
