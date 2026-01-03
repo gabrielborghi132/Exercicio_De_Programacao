@@ -2,13 +2,13 @@
 using namespace std;
 
 // Atalhos de tipo
-using ll  = long long;
-using ld  = long double;
+using ll = long long;
+using ld = long double;
 
-using vi  = vector<int>;
+using vi = vector<int>;
 using vll = vector<ll>;
-using pii = pair<int,int>;
-using pll = pair<ll,ll>;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
 
 // Macros úteis
 #define endl '\n'
@@ -16,10 +16,9 @@ using pll = pair<ll,ll>;
 #define S second
 #define PB push_back
 #define MP make_pair
-#define REP(i,a,b) for (int i = (a); i < (b); ++i)
-#define ALL(x) (x).begin(), (x).end()
 
-int main() {
+int main()
+{
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
