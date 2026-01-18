@@ -1,51 +1,70 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define endl "\n"
-
-struct node
+class Solution
 {
-    int next[26];
-    int degree;
-    int terminal_count;
-    int prefix_count;
-
-    node()
+private:
+    struct node
     {
-        fill(next, next + 26, -1);
-        degree = 0;
-        terminal_count = 0;
-        prefix_count = 0;
-    }
-};
+        int next[26];
+        int degree;
+        int terminal_count;
+        int prefix_count;
 
-vector<node> trie(1);
-
-void add_string(const string &s)
-{
-    int v;
-    for (auto ch : s)
-    {
-        int c = ch - 'a';
-
-        if (trie[v].next[c] == -1)
+        node()
         {
-            trie[v].next[c] = trie.size();
+            fill(next, next + 26, -1);
+            degree = 0;
+            terminal_count = 0;
+            prefix_count = 0;
+        }
+    };
 
-            trie.emplace_back();
+    void add_string(const string &s)
+    {
+        int v = 0;
+        for (auto ch : s)
+        {
+            int c = ch - 'a';
 
-            trie[v].degree++;
+            if (trie[v].next[c] == -1)
+            {
+                trie[v].next[c] = trie.size();
+
+                trie.emplace_back();
+
+                trie[v].degree++;
+            }
             v = trie[v].next[c];
-
             trie[v].prefix_count++;
         }
         trie[v].terminal_count++;
     }
-}
-int main()
-{
-    vector<string> vt = {"flower", "flow", "flight"};
-    for (auto s : vt)
+
+    vector<node> trie;
+
+public:
+    string longestCommonPrefix(vector<string> &strs)
     {
-        add_string(s);
+        trie.emplace_back();
+        for (auto s : strs)
+        {
+            add_string(s);
+        }
+        string s = "";
+        int v = 0;
+        while (trie[v].degree == 1 && trie[v].terminal_count == 0)
+        {
+            for (int c = 0; c < 26; c++)
+            {
+                if (trie[v].next[c] != -1)
+                {
+                    s.push_back('a' + c);
+                    v = trie[v].next[c];
+                    break;
+                }
+            }
+        }
+        cout << s << endl;
     }
-}
+};
