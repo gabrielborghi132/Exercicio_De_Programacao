@@ -1,72 +1,70 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define endl "\n"
 
 struct node
 {
     int next[26];
-    int degree;
-    int terminal_count;
+    bool end;
 
     node()
     {
         fill(next, next + 26, -1);
-        degree = 0;
-        terminal_count = 0;
+        end = false;
     }
 };
 
-vector<node> trie(1);
+vector<node> trie;
+bool bad;
 
-bool add_string(const string &s)
+void add(const string &s)
 {
     int v = 0;
 
     for (char ch : s)
     {
-        if (trie[v].terminal_count > 0)
-            return true;
+        if (trie[v].end)
+            bad = true;
 
         int c = ch - 'a';
         if (trie[v].next[c] == -1)
         {
             trie[v].next[c] = (int)trie.size();
             trie.emplace_back();
-            trie[v].degree++;
         }
         v = trie[v].next[c];
     }
 
-    if (trie[v].terminal_count > 0)
-        return true;
-    if (trie[v].degree > 0)
-        return true;
+    for (int c = 0; c < 26; c++)
+        if (trie[v].next[c] != -1)
+            bad = true;
 
-    trie[v].terminal_count++;
-    return false;
+    if (trie[v].end)
+        bad = true;
+
+    trie[v].end = true;
 }
 
 int main()
 {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     int n;
-    while (cin >> n, n)
+    while (cin >> n && n)
     {
         trie.clear();
         trie.emplace_back();
+        bad = false;
 
-        bool ruim = false;
-        string s;
-
-        for (int i = 0; i < n; i++)
+        while (n--)
         {
+            string s;
             cin >> s;
-            if (!ruim)
-                ruim = add_string(s);
-            else
-                add_string(s);
+            if (!bad)
+                add(s);
         }
 
-        cout << (ruim ? "Conjunto Ruim" : "Conjunto Bom") << endl;
+        cout << (bad ? "Conjunto Ruim\n" : "Conjunto Bom\n");
     }
     return 0;
 }
