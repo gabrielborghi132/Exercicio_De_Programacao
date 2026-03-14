@@ -1,28 +1,61 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Atalhos de tipo
+// ── Tipos ────────────────────────────────────────────
 using ll = long long;
-using ld = long double;
-
-using vi = vector<int>;
-using vll = vector<ll>;
+using ull = unsigned long long;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
+using vi = vector<int>;
+using vll = vector<ll>;
 
-// Macros úteis
+// ── I/O rápido ───────────────────────────────────────
+#define FAST_IO                  \
+    ios::sync_with_stdio(false); \
+    cin.tie(NULL)
 #define endl '\n'
-#define F first
-#define S second
-#define PB push_back
-#define MP make_pair
+
+// ── Loops ────────────────────────────────────────────
+#define FOR(i, a, b) for (int i = (a); i < (b); i++)
+#define RFOR(i, a, b) for (int i = (a); i > (b); i--)
+#define each(x, v) for (auto &x : (v))
+
+// ── Utilidades ───────────────────────────────────────
+#define all(v) (v).begin(), (v).end()
+#define sz(v) (int)(v).size()
+#define pb push_back
+#define mp make_pair
+#define fi first
+#define se second
+
+// ── Debug (desative antes de submeter!) ──────────────
+#ifdef LOCAL
+#define dbg(x) cerr << #x << " = " << x << '\n'
+#else
+#define dbg(x)
+#endif
+
+// ── Constantes ───────────────────────────────────────
+const int INF = 1e9;
+const ll LINF = 1e18;
+const int MOD = 1e9 + 7;
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    FAST_IO;
 
-    // código da solução aqui
+    vi nums = {3, 1, 4, 1, 5};
+    sort(all(nums)); // sort(begin, end) — sem boilerplate
 
-    return 0;
+    each(x, nums)
+            cout
+        << x << ' '; // 1 1 3 4 5
+    cout << endl;
+
+    cout << sz(nums) << endl; // 5
+
+    pii p = mp(10, 20);
+    cout << p.fi << ' ' << p.se << endl; // 10 20
+
+    dbg(p.fi); // só aparece se compilar com -DLOCAL
 }
