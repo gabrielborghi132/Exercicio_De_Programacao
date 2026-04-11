@@ -43,4 +43,13 @@ const int MOD = 1e9 + 7;
 int main()
 {
     FAST_IO;
+
+    ll a, b, c;
+    cin >> a >> b >> c;
+    ll x = 0;
+    FOR(i, 1, c + 1)
+    {
+        x += a * i;
+    }
+    cout << max(0LL, x - b) << endl;
 }

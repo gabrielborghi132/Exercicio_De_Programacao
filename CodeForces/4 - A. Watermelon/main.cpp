@@ -43,4 +43,19 @@ const int MOD = 1e9 + 7;
 int main()
 {
     FAST_IO;
+
+    int w;
+    cin >> w;
+
+    // Se o peso é par e maior que 2
+    if (w % 2 == 0 && w > 2)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
+
+    return 0;
 }

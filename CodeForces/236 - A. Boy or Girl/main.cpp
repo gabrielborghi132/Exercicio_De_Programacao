@@ -43,4 +43,22 @@ const int MOD = 1e9 + 7;
 int main()
 {
     FAST_IO;
+
+    string s;
+    getline(cin, s);
+
+    set<char> st;
+
+    each(x, s)
+    {
+        if (st.find(x) == st.end())
+        {
+            st.insert(x);
+        }
+    }
+
+    if ((ll)st.size() % 2 == 0)
+        cout << "CHAT WITH HER!" << endl;
+    else
+        cout << "IGNORE HIM!" << endl;
 }

@@ -43,4 +43,16 @@ const int MOD = 1e9 + 7;
 int main()
 {
     FAST_IO;
+
+    ll x;
+    cin >> x;
+    vector<ll> vt = {5, 4, 3, 2, 1};
+    ll i = 0;
+    ll conta = 0;
+    each(m, vt)
+    {
+        conta += x / m; // quantas moedas m cabem
+        x %= m;         // resto que ainda falta trocar
+    }
+    cout << conta << endl;
 }

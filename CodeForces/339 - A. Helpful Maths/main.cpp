@@ -43,4 +43,23 @@ const int MOD = 1e9 + 7;
 int main()
 {
     FAST_IO;
+
+    string s;
+    getline(cin, s);
+
+    vector<char> vt;
+
+    each(x, s)
+    {
+        if (x != '+')
+            vt.push_back(x);
+    }
+    sort(all(vt));
+
+    FOR(i, 0, sz(vt) - 1)
+    {
+        cout << vt[i] << '+';
+    }
+
+    cout << vt[sz(vt) - 1] << endl;
 }

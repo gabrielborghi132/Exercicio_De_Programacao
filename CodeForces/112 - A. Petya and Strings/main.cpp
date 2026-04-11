@@ -43,4 +43,20 @@ const int MOD = 1e9 + 7;
 int main()
 {
     FAST_IO;
+
+    string s, s2;
+    getline(cin, s);
+    getline(cin, s2);
+    vector<string> vt;
+    transform(s.begin(), s.end(), s.begin(), [](unsigned char c)
+              { return tolower(c); });
+    transform(s2.begin(), s2.end(), s2.begin(), [](unsigned char c)
+              { return tolower(c); });
+
+    if (s == s2)
+        cout << 0 << endl;
+    else if (s < s2)
+        cout << -1 << endl;
+    else
+        cout << 1 << endl;
 }
