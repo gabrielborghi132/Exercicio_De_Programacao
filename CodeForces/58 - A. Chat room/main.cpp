@@ -44,5 +44,25 @@ int main()
 {
     FAST_IO;
 
+    string s;
+    getline(cin, s);
+    string target = "hello";
+
+    ll t = 0;
+    each(x, s)
+    {
+        if (x == target[t])
+        {
+            t++;
+        }
+        if (t == 5)
+            break;
+    }
+
+    if (t == 5)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+
     return 0;
 }
