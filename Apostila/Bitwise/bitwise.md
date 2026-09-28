@@ -1,3 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Apostila: Bitmask do zero
 
 ## 1. O que é uma bitmask?
@@ -341,6 +355,96 @@ O programa percorre `2ⁿ` subconjuntos e examina até `n` posições para cada 
 5. Índices 1 e 2; valores 5 e 2; soma 7.
 6. `101₂`, ou seja, `{0, 2}`.
 
+## 13. Outros fundamentos importantes
+
+### Operadores bit a bit e lógicos
+
+`&` e `|` operam nos bits; `&&` e `||` combinam condições booleanas. Para testar um bit, use `&`:
+
+```cpp exemplo.cpp
+bool ligado = (mask & (1 << i)) != 0;
+```
+
+Por exemplo, `mask && (1 << i)` não verifica se o bit `i` está ligado: apenas verifica se os dois valores são diferentes de zero.
+
+### XOR e deslocamento à direita
+
+- `A ^ B` mantém os bits presentes em exatamente uma das máscaras (diferença simétrica).
+- `x ^ x == 0` e `x ^ 0 == x`.
+- `mask ^= (1 << i)` alterna o bit `i`.
+- `(mask >> i) & 1` extrai o valor do bit `i`.
+
+### Testes úteis
+
+Para verificar se `sub` é submáscara de `mask`, todos os bits de `sub` devem estar em `mask`:
+
+```cpp exemplo.cpp
+bool eh_submascara = (sub & mask) == sub;
+```
+
+Para complementar uma máscara considerando apenas `n` bits, limite o resultado com uma máscara completa:
+
+```cpp exemplo.cpp
+unsigned int full_mask = (1u << n) - 1;
+unsigned int complemento = full_mask ^ mask;
+```
+
+Use isso somente se `n` couber na largura do tipo. O operador `~mask` sozinho inverte todos os bits do tipo, não apenas os `n` bits do conjunto.
+
+Se `x > 0`, ele é potência de 2 quando tem um único bit ligado:
+
+```cpp exemplo.cpp
+bool eh_potencia_de_dois = x != 0 && (x & (x - 1)) == 0;
+```
+
+Os parênteses são importantes por causa da precedência dos operadores em C++.
+
+### Isolar o bit ligado mais à direita
+
+Com um inteiro sem sinal, `mask & -mask` deixa ligado somente o bit 1 mais à direita. Para percorrer os bits ligados, pode-se isolar e remover um por vez:
+
+```cpp exemplo.cpp
+while (mask != 0) {
+    unsigned int bit = mask & -mask;
+    int indice = countr_zero(bit); // requer <bit>, C++20
+    mask -= bit;
+}
+```
+
+Se `mask == 0`, não há bit ligado; não chame `countr_zero` com zero. Outra forma de remover o bit mais à direita é `mask &= mask - 1`.
+
+### Largura e deslocamentos
+
+`1 << i` usa `int`; em plataformas comuns de Codeforces, prefira índices até 30. Para máscaras maiores, use `1LL << i` e respeite a largura de `long long` (normalmente índices até 62 para manter o resultado positivo). Nunca desloque por uma quantidade igual ou maior que a largura do tipo. Mesmo quando o tipo comporta a máscara, percorrer `2ⁿ` estados pode ser inviável.
+
 ---
 
-Esta apostila cobre os conceitos e exemplos estudados até aqui. Um próximo passo natural é usar bitmasks em **programação dinâmica sobre subconjuntos (DP com bitmask)**.
+Esta apostila resume os fundamentos estudados. O próximo passo, quando esses padrões estiverem firmes, é usar bitmasks em **programação dinâmica sobre subconjuntos (DP com bitmask)**.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
